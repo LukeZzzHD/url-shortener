@@ -2,11 +2,12 @@ import { api } from "@/trpc/server";
 import { notFound, redirect } from "next/navigation";
 
 interface Props {
-  params: { shortId: string };
+  params: Promise<{ shortId: string }>;
 }
 
 export default async function LinkRedirectPage({ params }: Props) {
-  const entry = await api.url.getByShortUrl({ shortUrl: params.shortId });
+  const { shortId } = await params;
+  const entry = await api.url.getByShortUrl({ shortUrl: shortId });
 
   if (!entry) {
     notFound(); // Show the 404 page

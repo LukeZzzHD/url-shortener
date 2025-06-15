@@ -2,11 +2,13 @@
 
 import { useState, useMemo } from "react";
 import { api } from "@/trpc/react";
-import { DOMAIN } from "@/constants";
 import URLShortenerHeader from "./header";
 import URLShortenerForm from "./form";
 import URLShortenerResult from "./result";
 import URLShortenerFooter from "./footer";
+import { env } from "@/env";
+
+const DOMAIN = env.NEXT_PUBLIC_DOMAIN;
 
 export default function URLShortener() {
   const [url, setUrl] = useState("");
